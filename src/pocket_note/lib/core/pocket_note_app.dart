@@ -15,6 +15,7 @@ class PocketNoteApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        typography: Typography()
       ),
       routerConfig: _appRouter.config(),
     );

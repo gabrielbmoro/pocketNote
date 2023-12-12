@@ -1,4 +1,3 @@
-
 import 'package:mobx/mobx.dart';
 import 'package:pocket_note/domain/usecases/calculate_power_bill_usecase.dart';
 
@@ -15,7 +14,10 @@ abstract class AddPowerBillBase with Store {
   AddPowerBillBase(this._calculatePowerBillUseCase);
 
   @action
-  void calculate() {
-    final x = "";
-  }
+  void save({
+    required String currentReadingInKWm,
+    required previousReadingInKWm,
+    required totalNeighborReadingInKWm,
+    required totalNeighborValue,
+  }) {}
 }
