@@ -14,10 +14,17 @@ abstract class AddPowerBillBase with Store {
   AddPowerBillBase(this._calculatePowerBillUseCase);
 
   @action
-  void save({
-    required String currentReadingInKWm,
-    required previousReadingInKWm,
-    required totalNeighborReadingInKWm,
-    required totalNeighborValue,
-  }) {}
+  void setLastReading(String? lastReading) {}
+
+  @action
+  void setCurrentReading(String? currentReading) {}
+
+  @action
+  void setNeighborsTotalReading(String? neighborsTotalReading) {}
+
+  @action
+  void setNeighborsTotalValue(String? neighborsTotalReading) {}
+
+  @action
+  void save() {}
 }

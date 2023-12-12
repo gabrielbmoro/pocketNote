@@ -16,12 +16,6 @@ class AddPowerBillScreen extends StatefulWidget {
 class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
   late AddPowerBillStore _store;
 
-  final TextEditingController _currentReadingInKWm = TextEditingController();
-  final TextEditingController _previousReadingInKWm = TextEditingController();
-  final TextEditingController _totalNeighborReadingInKWm =
-      TextEditingController();
-  final TextEditingController _totalNeighborValue = TextEditingController();
-
   @override
   void initState() {
     _store = getIt();
@@ -48,14 +42,14 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
               ),
               TextInputField(
                 labelText: 'Leitura Atual (kWm):',
-                textEditingController: _currentReadingInKWm,
+                onChanged: _store.setCurrentReading,
               ),
               const SizedBox(
                 height: 12,
               ),
               TextInputField(
                 labelText: 'Leitura Passada (kWm):',
-                textEditingController: _previousReadingInKWm,
+                onChanged: _store.setLastReading,
               ),
               const SizedBox(
                 height: 12,
@@ -73,14 +67,14 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
               ),
               TextInputField(
                 labelText: 'Total consumido da conta da CEEE (kWm):',
-                textEditingController: _totalNeighborReadingInKWm,
+                onChanged: _store.setNeighborsTotalReading,
               ),
               const SizedBox(
                 height: 12,
               ),
               TextInputField(
                 labelText: 'Valor total da conta da CEEE (R\$):',
-                textEditingController: _totalNeighborValue,
+                onChanged: _store.setNeighborsTotalValue,
               ),
               const SizedBox(
                 height: 30,
@@ -88,15 +82,7 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton(
-                  onPressed: () => {
-                    _store.save(
-                      totalNeighborReadingInKWm:
-                          _totalNeighborReadingInKWm.text,
-                      totalNeighborValue: _totalNeighborValue.text,
-                      currentReadingInKWm: _currentReadingInKWm.text,
-                      previousReadingInKWm: _previousReadingInKWm.text,
-                    )
-                  },
+                  onPressed: () => {_store.save()},
                   child: const Text(
                     "Save",
                   ),
