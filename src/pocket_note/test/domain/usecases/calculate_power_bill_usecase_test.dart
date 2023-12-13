@@ -8,15 +8,17 @@ void main() {
     'CalculatePowerBillUseCaseImpl should return R\$ 304.5',
     () {
       final powerBill = PowerBill(
-          lastReadingInKWm: 2907.5,
-          currentReadingInKWm: 3117.5,
-          neighborsTotalReadingInKWm: 633.0,
-          neighborsTotalValue: 434.84);
+        lastReadingInKWm: 2907.5,
+        currentReadingInKWm: 3117.5,
+        neighborsTotalReadingInKWm: 633.0,
+        neighborsTotalValue: 434.84,
+        date: "2024-01-12 15:00:00 UTC",
+      );
       final calculatePowerBillUseCaseImpl = CalculatePowerBillUseCaseImpl();
 
       final result = calculatePowerBillUseCaseImpl.invoke(powerBill);
 
-      expect(result.finalValue, 'R\$ 305,70');
+      expect(result, 'R\$ 305,70');
     },
   );
 }

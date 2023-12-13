@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class TextInputField extends StatelessWidget {
+class NumberTextInputField extends StatelessWidget {
   final String labelText;
   final Function(String?) onChanged;
 
-  const TextInputField({
+  const NumberTextInputField({
     super.key,
     required this.labelText,
     required this.onChanged

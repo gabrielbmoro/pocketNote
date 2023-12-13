@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:pocket_note/core/di/injection.dart';
 import 'package:pocket_note/ui/screens/addpowerbill/store/add_power_bill_store.dart';
 import 'package:pocket_note/ui/widgets/custom_scaffold.dart';
-import 'package:pocket_note/ui/widgets/text_input_field.dart';
+import 'package:pocket_note/ui/widgets/number_text_input_field.dart';
+
+import '../../widgets/primary_button.dart';
 
 @RoutePage()
 class AddPowerBillScreen extends StatefulWidget {
@@ -40,14 +42,14 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
               const SizedBox(
                 height: 12,
               ),
-              TextInputField(
+              NumberTextInputField(
                 labelText: 'Leitura Atual (kWm):',
                 onChanged: _store.setCurrentReading,
               ),
               const SizedBox(
                 height: 12,
               ),
-              TextInputField(
+              NumberTextInputField(
                 labelText: 'Leitura Passada (kWm):',
                 onChanged: _store.setLastReading,
               ),
@@ -65,28 +67,23 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
               const SizedBox(
                 height: 12,
               ),
-              TextInputField(
+              NumberTextInputField(
                 labelText: 'Total consumido da conta da CEEE (kWm):',
                 onChanged: _store.setNeighborsTotalReading,
               ),
               const SizedBox(
                 height: 12,
               ),
-              TextInputField(
+              NumberTextInputField(
                 labelText: 'Valor total da conta da CEEE (R\$):',
                 onChanged: _store.setNeighborsTotalValue,
               ),
               const SizedBox(
                 height: 30,
               ),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: () => {_store.save()},
-                  child: const Text(
-                    "Save",
-                  ),
-                ),
+              PrimaryButton(
+                title: "Save",
+                onPressed: () => {_store.save()},
               )
             ],
           ),

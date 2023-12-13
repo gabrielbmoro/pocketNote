@@ -10,13 +10,14 @@ class PowerBill extends Equatable {
 
   double neighborsTotalValue;
 
-  String? finalValue;
+  String date;
 
   PowerBill({
     required this.lastReadingInKWm,
     required this.currentReadingInKWm,
     required this.neighborsTotalReadingInKWm,
     required this.neighborsTotalValue,
+    required this.date,
   });
 
   @override
