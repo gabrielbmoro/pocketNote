@@ -35,6 +35,7 @@ dependencies:
   # state management
   mobx: ^2.2.3
   mobx_codegen: ^2.4.0
+  flutter_mobx: ^2.2.0+1
   build_runner: ^2.4.6
 
   # dependency injection

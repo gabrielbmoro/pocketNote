@@ -4,6 +4,7 @@ import 'package:pocket_note/core/di/injection.dart';
 import 'package:pocket_note/ui/screens/addpowerbill/store/add_power_bill_store.dart';
 import 'package:pocket_note/ui/widgets/custom_scaffold.dart';
 import 'package:pocket_note/ui/widgets/number_text_input_field.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../widgets/primary_button.dart';
 
@@ -35,6 +36,12 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Observer(
+                builder: (_) => Text(
+                  style: Theme.of(context).textTheme.labelLarge,
+                  'Date ${_store.date}',
+                ),
+              ),
               Text(
                 "Casa",
                 style: Theme.of(context).textTheme.labelLarge,

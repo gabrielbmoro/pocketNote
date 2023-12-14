@@ -1,30 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
-import 'package:pocket_note/domain/usecases/calculate_power_bill_usecase.dart';
-import 'package:pocket_note/ui/screens/addpowerbill/add_power_bill_ui_state.dart';
 
 part 'add_power_bill_store.g.dart';
 
 class AddPowerBillStore = AddPowerBillBase with _$AddPowerBillStore;
 
 abstract class AddPowerBillBase with Store {
-
   String? _lastReading;
   String? _currentReading;
   String? _neighborsTotalReading;
   String? _neighborsTotalValue;
 
   @observable
-  AddPowerBillUIState uiState = AddPowerBillUIState(
-    error: null,
-    isLoading: false,
-  );
-
-  AddPowerBillBase();
+  String date = "";
 
   @action
   void setLastReading(String? lastReading) {
     _lastReading = lastReading;
+    date = "$_lastReading";
   }
 
   @action
