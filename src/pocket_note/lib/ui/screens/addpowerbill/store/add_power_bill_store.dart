@@ -1,5 +1,7 @@
 import 'package:mobx/mobx.dart';
 
+import '../../../../domain/usecases/save_power_bill_usecase.dart';
+
 part 'add_power_bill_store.g.dart';
 
 class AddPowerBillStore = AddPowerBillBase with _$AddPowerBillStore;
@@ -12,6 +14,10 @@ abstract class AddPowerBillBase with Store {
 
   @observable
   String date = "";
+
+  final SavePowerBillUseCase savePowerBillUseCase;
+
+  AddPowerBillBase(this.savePowerBillUseCase);
 
   @action
   void setLastReading(String? lastReading) {
