@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class PrimaryButton extends StatelessWidget {
-  Function onPressed;
+  VoidCallback? onPressed;
   String title;
 
   PrimaryButton({super.key, required this.onPressed, required this.title});
@@ -12,7 +12,7 @@ class PrimaryButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: OutlinedButton(
-        onPressed: () => onPressed,
+        onPressed: onPressed,
         child: Text(title),
       ),
     );

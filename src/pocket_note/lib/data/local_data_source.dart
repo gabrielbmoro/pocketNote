@@ -1,9 +1,8 @@
-import 'dart:collection';
-
-import 'package:flutter/cupertino.dart';
+import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
+@lazySingleton
 class LocalDataSource {
   static const databaseName = "pocket_note_database.db";
 
@@ -19,7 +18,7 @@ class LocalDataSource {
   late Database _database;
 
   LocalDataSource() {
-    init().then((value) => debugPrint("Data base initialized"));
+    init();
   }
 
   Future<void> init() async {
@@ -38,15 +37,16 @@ class LocalDataSource {
           '$powerBillsLastReadingInKwmKey REAL, '
           '$powerBillsCurrentReadingInKwmKey REAL, '
           '$powerBillsNeighborsTotalReadingInKwmKey REAL, '
-          '$powerBillsNeighborsTotalValueKey REAL'
-          '$powerBillsDateKey TEXT,'
+          '$powerBillsNeighborsTotalValueKey REAL,'
+          '$powerBillsDateKey TEXT'
           ')',
         );
       },
+      version: 1,
     );
   }
 
-  insertPowerBill({
+  Future<bool> insertPowerBill({
     required double lastReadingInKWm,
     required double currentReadingInKWm,
     required double neighborsTotalReadingInKWm,

@@ -88,14 +88,24 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
               const SizedBox(
                 height: 30,
               ),
-              PrimaryButton(
-                title: "Save",
-                onPressed: () => {_store.save()},
-              )
+              Observer(
+                builder: (_) => primaryButton(
+                  success: _store.success,
+                  onPressed: () => {_store.save()},
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Widget primaryButton({required bool? success, required VoidCallback onPressed}) {
+    if (success == true) {
+      return PrimaryButton(title: "Saved", onPressed: null);
+    } else {
+      return PrimaryButton(title: "Save", onPressed: onPressed);
+    }
   }
 }
