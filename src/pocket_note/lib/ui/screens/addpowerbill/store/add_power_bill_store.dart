@@ -4,6 +4,7 @@ import 'package:pocket_note/core/extensions/string_ext.dart';
 import 'package:pocket_note/domain/models/power_bill.dart';
 
 import '../../../../domain/usecases/save_power_bill_usecase.dart';
+import '../add_power_bill_ui_state.dart';
 
 part 'add_power_bill_store.g.dart';
 
@@ -17,10 +18,8 @@ abstract class AddPowerBillBase with Store {
   String? _neighborsTotalValue;
 
   @observable
-  String date = "";
-
-  @observable
-  bool? success;
+  AddPowerBillUIState uiState = AddPowerBillUIState(
+      date: "", isLoading: false, successMessage: null, errorMessage: null);
 
   final SavePowerBillUseCase savePowerBillUseCase;
 
@@ -55,7 +54,7 @@ abstract class AddPowerBillBase with Store {
         _neighborsTotalReading!.parseToDouble() ?? 0.0;
 
     final PowerBill powerBill = PowerBill(
-      date: date,
+      date: uiState.date,
       lastReadingInKWm: lastReadingInKWm,
       currentReadingInKWm: currentReadingInKWm,
       neighborsTotalValue: neighborsTotalValue,
@@ -67,7 +66,18 @@ abstract class AddPowerBillBase with Store {
   }
 
   _onSaveSuccess(bool value) {
-
-    success = value;
+    if (value) {
+      uiState = AddPowerBillUIState(
+          isLoading: false,
+          errorMessage: null,
+          successMessage: "success",
+          date: uiState.date);
+    } else {
+      uiState = AddPowerBillUIState(
+          isLoading: false,
+          errorMessage: "THhh",
+          successMessage: null,
+          date: uiState.date);
+    }
   }
 }
