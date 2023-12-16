@@ -33,20 +33,26 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
       appBarTitle: "Add Power Bill",
       hasBackArrow: true,
       body: Observer(
-        builder: (_) => bodySection(context, _store.uiState),
+        builder: (_) => bodySection(
+          context,
+          _store.uiState,
+          () => _store.save(),
+        ),
       ),
     );
   }
 
-  Widget bodySection(BuildContext context, AddPowerBillUIState uiState) {
-    if (uiState.errorMessage != null) {
-      return errorBody(context, () => _store.save());
-    } else if (uiState.isLoading) {
-      return const CircularProgressIndicator();
-    } else if (uiState.successMessage != null) {
-      return successBody();
-    } else {
-      return noneBody(() => _store.save());
+  Widget bodySection(BuildContext context, AddPowerBillUIState uiState,
+      VoidCallback onPressed) {
+    switch (uiState.resultType) {
+      case ResultType.success:
+        return successBody();
+      case ResultType.error:
+        return errorBody(context, onPressed);
+      case ResultType.loading:
+        return const CircularProgressIndicator();
+      default:
+        return noneBody(onPressed);
     }
   }
 
@@ -129,20 +135,5 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
         ],
       ),
     );
-  }
-
-  Widget bottomWidget({
-    required AddPowerBillUIState uiState,
-    required VoidCallback onPressed,
-  }) {
-    if (uiState.isLoading) {
-      return const CircularProgressIndicator();
-    } else if (uiState.successMessage != null) {
-      return const Text("Success");
-    } else if (uiState.errorMessage != null) {
-      return TryAgainButton(onPressed: onPressed);
-    } else {
-      return PrimaryButton(title: "Save", onPressed: onPressed);
-    }
   }
 }

@@ -1,13 +1,15 @@
-
 class AddPowerBillUIState {
-  bool isLoading = false;
-  String? errorMessage;
-  String? successMessage;
+  ResultType? resultType;
   String date = "";
 
-  AddPowerBillUIState(
-      {required this.isLoading,
-      required this.errorMessage,
-      required this.successMessage,
-      required this.date});
+  AddPowerBillUIState({
+    required this.resultType,
+    required this.date,
+  });
+}
+
+enum ResultType {
+  success,
+  error,
+  loading;
 }
