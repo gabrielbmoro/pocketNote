@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
+import 'package:pocket_note/domain/models/power_bill.dart';
 import 'package:sqflite/sqflite.dart';
 
 @lazySingleton
@@ -63,5 +64,26 @@ class LocalDataSource {
 
     final result = await _database.insert(powerBillsTableName, values);
     return result == 0 ? false : true;
+  }
+
+  Future<Iterable<PowerBill>> getPowerBills() async {
+    final result = await _database.query(powerBillsTableName, columns: [
+      powerBillsNeighborsTotalReadingInKwmKey,
+      powerBillsNeighborsTotalValueKey,
+      powerBillsCurrentReadingInKwmKey,
+      powerBillsLastReadingInKwmKey,
+      powerBillsDateKey
+    ]);
+
+    return result.map(
+      (e) => PowerBill(
+        lastReadingInKWm: e[powerBillsLastReadingInKwmKey] as double,
+        currentReadingInKWm: e[powerBillsCurrentReadingInKwmKey] as double,
+        neighborsTotalReadingInKWm:
+            e[powerBillsNeighborsTotalReadingInKwmKey] as double,
+        neighborsTotalValue: e[powerBillsNeighborsTotalValueKey] as double,
+        date: e[powerBillsDateKey] as String,
+      ),
+    );
   }
 }

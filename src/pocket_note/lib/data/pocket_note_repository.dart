@@ -4,6 +4,8 @@ import 'package:pocket_note/domain/models/power_bill.dart';
 
 mixin PocketNoteRepository {
   Future<bool> save(PowerBill powerBill);
+
+  Future<List<PowerBill>> getPowerBills();
 }
 
 @Injectable(as: PocketNoteRepository)
@@ -21,5 +23,11 @@ class PocketNoteRepositoryImpl with PocketNoteRepository {
       neighborsTotalValue: powerBill.neighborsTotalValue,
       date: powerBill.date,
     );
+  }
+
+  @override
+  Future<List<PowerBill>> getPowerBills() async {
+    final iterable = await localDataSource.getPowerBills();
+    return iterable.toList();
   }
 }

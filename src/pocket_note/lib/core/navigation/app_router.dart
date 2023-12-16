@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 
 import '../../ui/screens/addpowerbill/add_power_bill_screen.dart';
 import '../../ui/screens/home/home_screen.dart';
-import '../../ui/screens/powerbill/power_bill_screen.dart';
+import '../../ui/screens/powerbills/power_bills_screen.dart';
 
 part 'app_router.gr.dart';
 
