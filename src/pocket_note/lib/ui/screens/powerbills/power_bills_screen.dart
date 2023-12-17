@@ -58,6 +58,7 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
 
   Widget _buildItem(TotalPowerBill totalPowerBill) {
     return PowerBillCard(
+      month: totalPowerBill.powerBill.date,
       currentReadingInKWm:
           totalPowerBill.powerBill.currentReadingInKWm.toStringAsFixed(2),
       lastReadingInKWm:

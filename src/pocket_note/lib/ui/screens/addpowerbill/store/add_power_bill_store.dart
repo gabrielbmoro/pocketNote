@@ -2,7 +2,6 @@ import 'package:injectable/injectable.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pocket_note/core/extensions/string_ext.dart';
 import 'package:pocket_note/domain/models/power_bill.dart';
-
 import '../../../../domain/usecases/save_power_bill_usecase.dart';
 import '../add_power_bill_ui_state.dart';
 
@@ -16,39 +15,56 @@ abstract class AddPowerBillBase with Store {
   String? _currentReading;
   String? _neighborsTotalReading;
   String? _neighborsTotalValue;
+  final List<String> months = [
+    "Janeiro",
+    "Fevereiro",
+    "Março",
+    "Abril",
+    "Maio",
+    "Junho",
+    "Julho",
+    "Agosto",
+    "Setembro",
+    "Outubro",
+    "Novembro",
+    "Dezembro"
+  ];
+  String? monthName;
 
   @observable
   AddPowerBillUIState uiState = AddPowerBillUIState(
-    date: "",
     resultType: null,
   );
 
   final SavePowerBillUseCase savePowerBillUseCase;
 
-  AddPowerBillBase(this.savePowerBillUseCase);
+  AddPowerBillBase(this.savePowerBillUseCase) {
+    monthName = months[DateTime.now().month - 1];
+  }
 
-  @action
   void setLastReading(String? lastReading) {
     _lastReading = lastReading;
   }
 
-  @action
   void setCurrentReading(String? currentReading) {
     _currentReading = currentReading;
   }
 
-  @action
+  void setMonth(String? month) {
+    monthName = month;
+  }
+
   void setNeighborsTotalReading(String? neighborsTotalReading) {
     _neighborsTotalReading = neighborsTotalReading;
   }
 
-  @action
   void setNeighborsTotalValue(String? neighborsTotalValue) {
     _neighborsTotalValue = neighborsTotalValue;
   }
 
   @action
   void save() {
+    final date = monthName ?? "";
     final lastReadingInKWm = _lastReading!.parseToDouble() ?? 0.0;
     final currentReadingInKWm = _currentReading!.parseToDouble() ?? 0.0;
     final neighborsTotalValue = _neighborsTotalValue!.parseToDouble() ?? 0.0;
@@ -56,7 +72,7 @@ abstract class AddPowerBillBase with Store {
         _neighborsTotalReading!.parseToDouble() ?? 0.0;
 
     final PowerBill powerBill = PowerBill(
-      date: uiState.date,
+      date: date,
       lastReadingInKWm: lastReadingInKWm,
       currentReadingInKWm: currentReadingInKWm,
       neighborsTotalValue: neighborsTotalValue,
@@ -64,7 +80,6 @@ abstract class AddPowerBillBase with Store {
     );
     uiState = AddPowerBillUIState(
       resultType: ResultType.loading,
-      date: uiState.date,
     );
     savePowerBillUseCase
         .invoke(powerBill)
@@ -76,7 +91,6 @@ abstract class AddPowerBillBase with Store {
     if (value) {
       uiState = AddPowerBillUIState(
         resultType: ResultType.success,
-        date: uiState.date,
       );
     } else {
       _onError();
@@ -86,7 +100,6 @@ abstract class AddPowerBillBase with Store {
   _onError() {
     uiState = AddPowerBillUIState(
       resultType: ResultType.error,
-      date: uiState.date,
     );
   }
 }

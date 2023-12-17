@@ -8,15 +8,16 @@ class PowerBillCard extends StatelessWidget {
   String neighborsTotalReadingInKWm;
   String kWhValue;
   String finalValue;
+  String month;
 
-  PowerBillCard({
-    super.key,
-    required this.currentReadingInKWm,
-    required this.lastReadingInKWm,
-    required this.neighborsTotalReadingInKWm,
-    required this.kWhValue,
-    required this.finalValue,
-  });
+  PowerBillCard(
+      {super.key,
+      required this.currentReadingInKWm,
+      required this.lastReadingInKWm,
+      required this.neighborsTotalReadingInKWm,
+      required this.kWhValue,
+      required this.finalValue,
+      required this.month});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class PowerBillCard extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "Janeiro",
+              month,
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(

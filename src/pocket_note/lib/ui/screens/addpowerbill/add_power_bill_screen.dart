@@ -4,6 +4,7 @@ import 'package:pocket_note/core/di/injection.dart';
 import 'package:pocket_note/ui/screens/addpowerbill/add_power_bill_ui_state.dart';
 import 'package:pocket_note/ui/screens/addpowerbill/store/add_power_bill_store.dart';
 import 'package:pocket_note/ui/widgets/custom_scaffold.dart';
+import 'package:pocket_note/ui/widgets/month_selector.dart';
 import 'package:pocket_note/ui/widgets/number_text_input_field.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pocket_note/ui/widgets/try_again_button.dart';
@@ -32,7 +33,8 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
     StackRouter router = AutoRouter.of(context);
     return CustomScaffold(
       appBarTitle: "Add Power Bill",
-      backEvent: ()=>router.pop(_store.uiState.resultType == ResultType.success),
+      backEvent: () =>
+          router.pop(_store.uiState.resultType == ResultType.success),
       body: Observer(
         builder: (_) => bodySection(
           context,
@@ -80,11 +82,23 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Observer(
-            builder: (_) => Text(
-              style: Theme.of(context).textTheme.labelLarge,
-              'Date ${_store.uiState.date}',
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "Data:",
+                style: Theme.of(context).textTheme.labelLarge,
+              ),
+              const SizedBox(width: 12),
+              MonthSelector(
+                initialMonthSelected: _store.monthName,
+                months: _store.months,
+                onSelected: _store.setMonth,
+              )
+            ],
+          ),
+          const SizedBox(
+            height: 12,
           ),
           Text(
             "Casa",
