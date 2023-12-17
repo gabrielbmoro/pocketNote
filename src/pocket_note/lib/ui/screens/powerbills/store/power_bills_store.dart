@@ -12,11 +12,20 @@ abstract class PowerBillsBase with Store {
   final GetPowerBillsUseCase powerBillsUseCase;
 
   PowerBillsBase(this.powerBillsUseCase) {
+    _load();
+  }
+
+  @observable
+  PowerBillsUIState uiState = PowerBillsUIState(powerBills: null);
+
+  _load() {
     powerBillsUseCase
         .invoke()
         .then((value) => uiState = PowerBillsUIState(powerBills: value));
   }
 
-  @observable
-  PowerBillsUIState uiState = PowerBillsUIState(powerBills: null);
+  @action
+  reload() {
+    _load();
+  }
 }

@@ -29,9 +29,10 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
 
   @override
   Widget build(BuildContext context) {
+    StackRouter router = AutoRouter.of(context);
     return CustomScaffold(
       appBarTitle: "Add Power Bill",
-      hasBackArrow: true,
+      backEvent: ()=>router.pop(_store.uiState.resultType == ResultType.success),
       body: Observer(
         builder: (_) => bodySection(
           context,

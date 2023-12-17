@@ -30,7 +30,7 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
   Widget build(BuildContext context) {
     StackRouter router = AutoRouter.of(context);
     return CustomScaffold(
-      hasBackArrow: true,
+      backEvent: () => router.pop(),
       appBarTitle: "Contas de Luz",
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -40,8 +40,7 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
           builder: (_) => _body(_store.uiState.powerBills),
         ),
       ),
-      onFloatingActionButtonEvent: (() =>
-          {router.navigate(const AddPowerBillRoute())}),
+      onFloatingActionButtonEvent: (() => _goToAddPowerBillScreen(context)),
     );
   }
 
@@ -59,5 +58,13 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
 
   Widget _buildItem(PowerBill powerBill) {
     return PowerBillCard(powerBill: powerBill);
+  }
+
+  _goToAddPowerBillScreen(BuildContext context) async {
+    StackRouter router = AutoRouter.of(context);
+    final result = await router.pushNamed("/${AddPowerBillRoute.name}");
+    if (result == true) {
+      _store.reload();
+    }
   }
 }

@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
     StackRouter router = AutoRouter.of(context);
     return CustomScaffold(
       appBarTitle: "PocketNote",
-      hasBackArrow: false,
+      backEvent: () => router.pop(),
       body: SizedBox(
         width: double.maxFinite,
         height: double.maxFinite,

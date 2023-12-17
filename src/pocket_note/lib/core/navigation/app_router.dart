@@ -19,6 +19,7 @@ class AppRouter extends _$AppRouter {
         ),
         AutoRoute(
           page: AddPowerBillRoute.page,
+          path: "/${AddPowerBillRoute.name}"
         )
       ];
 }
