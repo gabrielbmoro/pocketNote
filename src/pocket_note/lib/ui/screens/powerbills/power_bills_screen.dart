@@ -52,6 +52,7 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
       return const Text("empty");
     } else {
       return ListView.builder(
+          itemCount: powerBills.length,
           itemBuilder: (context, index) => _buildItem(powerBills[index]));
     }
   }
