@@ -3,7 +3,7 @@ import 'package:path/path.dart';
 import 'package:pocket_note/domain/models/power_bill.dart';
 import 'package:sqflite/sqflite.dart';
 
-@lazySingleton
+@singleton
 class LocalDataSource {
   static const databaseName = "pocket_note_database.db";
 
@@ -17,10 +17,6 @@ class LocalDataSource {
   static const powerBillsDateKey = "date";
 
   late Database _database;
-
-  LocalDataSource() {
-    init();
-  }
 
   Future<void> init() async {
     // Open the database and store the reference.

@@ -8,7 +8,7 @@ void main() async {
   // Importing 'package:flutter/widgets.dart' is required.
   WidgetsFlutterBinding.ensureInitialized();
 
-  configureDependencies();
+  await configureDependencies();
 
   runApp(PocketNoteApp());
 }
