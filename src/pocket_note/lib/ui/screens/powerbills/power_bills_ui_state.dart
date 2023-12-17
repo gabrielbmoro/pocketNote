@@ -1,7 +1,7 @@
-import '../../../domain/models/power_bill.dart';
+import 'package:pocket_note/domain/models/total_power_bill.dart';
 
 class PowerBillsUIState {
-  List<PowerBill>? powerBills;
+  List<TotalPowerBill>? powerBills;
 
   PowerBillsUIState({required this.powerBills});
 }

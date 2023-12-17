@@ -2,12 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pocket_note/core/navigation/app_router.dart';
+import 'package:pocket_note/domain/models/total_power_bill.dart';
 import 'package:pocket_note/ui/screens/powerbills/store/power_bills_store.dart';
 import 'package:pocket_note/ui/widgets/custom_scaffold.dart';
 import 'package:pocket_note/ui/widgets/power_bill_card.dart';
 
 import '../../../core/di/injection.dart';
-import '../../../domain/models/power_bill.dart';
 
 @RoutePage()
 class PowerBillScreen extends StatefulWidget {
@@ -44,7 +44,7 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
     );
   }
 
-  Widget _body(List<PowerBill>? powerBills) {
+  Widget _body(List<TotalPowerBill>? powerBills) {
     if (powerBills == null) {
       return const Text("null");
     } else if (powerBills.isEmpty) {
@@ -56,8 +56,18 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
     }
   }
 
-  Widget _buildItem(PowerBill powerBill) {
-    return PowerBillCard(powerBill: powerBill);
+  Widget _buildItem(TotalPowerBill totalPowerBill) {
+    return PowerBillCard(
+      currentReadingInKWm:
+          totalPowerBill.powerBill.currentReadingInKWm.toStringAsFixed(2),
+      lastReadingInKWm:
+          totalPowerBill.powerBill.lastReadingInKWm.toStringAsFixed(2),
+      neighborsTotalReadingInKWm: totalPowerBill
+          .powerBill.neighborsTotalReadingInKWm
+          .toStringAsFixed(2),
+      kWhValue: totalPowerBill.kWhValue.toStringAsFixed(2),
+      finalValue: totalPowerBill.finalValue.toStringAsFixed(2),
+    );
   }
 
   _goToAddPowerBillScreen(BuildContext context) async {

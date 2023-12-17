@@ -18,7 +18,8 @@ void main() {
 
       final result = calculatePowerBillUseCaseImpl.invoke(powerBill);
 
-      expect(result, 'R\$ 305,70');
+      expect(result.finalValue, 305.6986477784933);
+      expect(result.kWhValue, 1.4557078465642537);
     },
   );
 }

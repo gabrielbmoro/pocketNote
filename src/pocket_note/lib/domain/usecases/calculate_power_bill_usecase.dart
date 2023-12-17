@@ -1,16 +1,16 @@
 import 'package:injectable/injectable.dart';
-import 'package:intl/intl.dart';
+import 'package:pocket_note/domain/models/total_power_bill.dart';
 
 import '../models/power_bill.dart';
 
 mixin CalculatePowerBillUseCase {
-  String invoke(PowerBill powerBill);
+  TotalPowerBill invoke(PowerBill powerBill);
 }
 
 @Injectable(as: CalculatePowerBillUseCase)
 class CalculatePowerBillUseCaseImpl implements CalculatePowerBillUseCase {
   @override
-  String invoke(PowerBill powerBill) {
+  TotalPowerBill invoke(PowerBill powerBill) {
     double monthReading =
         powerBill.currentReadingInKWm - powerBill.lastReadingInKWm;
 
@@ -19,8 +19,10 @@ class CalculatePowerBillUseCaseImpl implements CalculatePowerBillUseCase {
 
     double totalValue = monthReading * valueOfOneKWm;
 
-    final oCcy = NumberFormat("#,##0.00", "pt_BR");
-    String finalValue = oCcy.format(totalValue);
-    return "R\$ $finalValue";
+    return TotalPowerBill(
+      powerBill: powerBill,
+      kWhValue: valueOfOneKWm,
+      finalValue: totalValue,
+    );
   }
 }
