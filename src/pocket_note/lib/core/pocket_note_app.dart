@@ -13,9 +13,16 @@ class PocketNoteApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorSchemeSeed: Colors.deepPurple,
         useMaterial3: true,
-        typography: Typography()
+        brightness: Brightness.light,
+        typography: Typography(),
+      ),
+      darkTheme: ThemeData(
+        colorSchemeSeed: Colors.deepPurple,
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        typography: Typography(),
       ),
       routerConfig: _appRouter.config(),
     );
