@@ -10,6 +10,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pocket_note/ui/widgets/try_again_button.dart';
 
 import '../../widgets/primary_button.dart';
+import '../resources/strings.dart';
 
 @RoutePage()
 class AddPowerBillScreen extends StatefulWidget {
@@ -32,7 +33,7 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
   Widget build(BuildContext context) {
     StackRouter router = AutoRouter.of(context);
     return CustomScaffold(
-      appBarTitle: "Add Power Bill",
+      appBarTitle: addPowerBill,
       backEvent: () =>
           router.pop(_store.uiState.resultType == ResultType.success),
       body: Observer(
@@ -62,11 +63,11 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
   Widget errorBody(BuildContext context, VoidCallback onPressed) {
     return Column(children: [
       Text(
-        "Something went wrong",
+        somethingWentWrong,
         style: Theme.of(context).textTheme.headlineSmall,
       ),
       Text(
-        "Please check your connection, or restart the application.",
+        checkYourConnectionMessage,
         style: Theme.of(context).textTheme.bodyMedium,
       ),
       TryAgainButton(onPressed: onPressed),
@@ -74,7 +75,7 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
   }
 
   Widget successBody() {
-    return const Text("Congrats");
+    return const Text(successAndTurnBackMessage);
   }
 
   Widget noneBody(VoidCallback onPressed) {
@@ -86,13 +87,13 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                "Data:",
+                date,
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               const SizedBox(width: 12),
               MonthSelector(
                 initialMonthSelected: _store.monthName,
-                months: _store.months,
+                months: months,
                 onSelected: _store.setMonth,
               )
             ],
@@ -108,14 +109,14 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
             height: 12,
           ),
           NumberTextInputField(
-            labelText: 'Leitura Atual (kWm):',
+            labelText: currentReadingInKWm,
             onChanged: _store.setCurrentReading,
           ),
           const SizedBox(
             height: 12,
           ),
           NumberTextInputField(
-            labelText: 'Leitura Passada (kWm):',
+            labelText: previousReadingInKWm,
             onChanged: _store.setLastReading,
           ),
           const SizedBox(
@@ -126,27 +127,27 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
             height: 12,
           ),
           Text(
-            "Condominio",
+            neighborhood,
             style: Theme.of(context).textTheme.labelLarge,
           ),
           const SizedBox(
             height: 12,
           ),
           NumberTextInputField(
-            labelText: 'Total consumido da conta da CEEE (kWm):',
+            labelText: totalConsumptionInKWm,
             onChanged: _store.setNeighborsTotalReading,
           ),
           const SizedBox(
             height: 12,
           ),
           NumberTextInputField(
-            labelText: 'Valor total da conta da CEEE (R\$):',
+            labelText: totalCurrencyValue,
             onChanged: _store.setNeighborsTotalValue,
           ),
           const SizedBox(
             height: 30,
           ),
-          PrimaryButton(title: "Save", onPressed: onPressed)
+          PrimaryButton(title: add, onPressed: onPressed)
         ],
       ),
     );

@@ -3,6 +3,7 @@ import 'package:mobx/mobx.dart';
 import 'package:pocket_note/core/extensions/string_ext.dart';
 import 'package:pocket_note/domain/models/power_bill.dart';
 import '../../../../domain/usecases/save_power_bill_usecase.dart';
+import '../../resources/strings.dart';
 import '../add_power_bill_ui_state.dart';
 
 part 'add_power_bill_store.g.dart';
@@ -15,20 +16,6 @@ abstract class AddPowerBillBase with Store {
   String? _currentReading;
   String? _neighborsTotalReading;
   String? _neighborsTotalValue;
-  final List<String> months = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro"
-  ];
   String? monthName;
 
   @observable

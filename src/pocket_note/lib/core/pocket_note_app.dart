@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocket_note/ui/screens/resources/strings.dart';
 
 import 'navigation/app_router.dart';
 
@@ -11,7 +12,7 @@ class PocketNoteApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: appName,
       theme: ThemeData(
         colorSchemeSeed: Colors.deepPurple,
         useMaterial3: true,

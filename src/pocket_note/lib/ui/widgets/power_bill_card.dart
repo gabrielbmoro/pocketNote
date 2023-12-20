@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocket_note/ui/screens/resources/strings.dart';
 import 'package:pocket_note/ui/widgets/row_label_value.dart';
 
 // ignore: must_be_immutable
@@ -34,12 +35,12 @@ class PowerBillCard extends StatelessWidget {
             const SizedBox(
               height: 14,
             ),
-            RowLabelValue(label: "Leitura atual:", value: currentReadingInKWm),
-            RowLabelValue(label: "Leitura passada:", value: lastReadingInKWm),
             RowLabelValue(
-                label: "Total consumido unidade:",
-                value: neighborsTotalReadingInKWm),
-            RowLabelValue(label: "Valor do kwh:", value: kWhValue),
+                label: currentReadingInKWm, value: currentReadingInKWm),
+            RowLabelValue(label: previousReadingInKWm, value: lastReadingInKWm),
+            RowLabelValue(
+                label: totalInKWMByUnit, value: neighborsTotalReadingInKWm),
+            RowLabelValue(label: valuePerKWh, value: kWhValue),
             SizedBox(
               width: double.maxFinite,
               child: Text(
@@ -53,9 +54,9 @@ class PowerBillCard extends StatelessWidget {
             ),
             Row(
               children: [
-                TextButton(
-                  onPressed: () => {},
-                  child: const Text("Add to bills"),
+                const TextButton(
+                  onPressed: null,
+                  child: Text(addToBills),
                 ),
                 const Spacer(),
                 IconButton(
