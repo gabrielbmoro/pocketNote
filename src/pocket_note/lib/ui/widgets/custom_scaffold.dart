@@ -20,13 +20,16 @@ class CustomScaffold extends StatelessWidget {
         leading: backEvent != null
             ? IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () => { backEvent!() },
+                onPressed: () => {backEvent!()},
               )
             : null,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(appBarTitle),
       ),
-      body: body,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+        child: body,
+      ),
       floatingActionButton: floatingActionButton(),
     );
   }

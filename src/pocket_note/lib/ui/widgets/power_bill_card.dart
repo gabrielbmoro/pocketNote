@@ -4,18 +4,18 @@ import 'package:pocket_note/ui/widgets/row_label_value.dart';
 
 // ignore: must_be_immutable
 class PowerBillCard extends StatelessWidget {
-  String currentReadingInKWm;
-  String lastReadingInKWm;
-  String neighborsTotalReadingInKWm;
+  String currentReadingValueInKWm;
+  String lastReadingValueInKWm;
+  String neighborsTotalReadingValueInKWm;
   String kWhValue;
   String finalValue;
   String month;
 
   PowerBillCard(
       {super.key,
-      required this.currentReadingInKWm,
-      required this.lastReadingInKWm,
-      required this.neighborsTotalReadingInKWm,
+      required this.currentReadingValueInKWm,
+      required this.lastReadingValueInKWm,
+      required this.neighborsTotalReadingValueInKWm,
       required this.kWhValue,
       required this.finalValue,
       required this.month});
@@ -36,10 +36,26 @@ class PowerBillCard extends StatelessWidget {
               height: 14,
             ),
             RowLabelValue(
-                label: currentReadingInKWm, value: currentReadingInKWm),
-            RowLabelValue(label: previousReadingInKWm, value: lastReadingInKWm),
+              label: currentReadingInKWm,
+              value: currentReadingValueInKWm,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
             RowLabelValue(
-                label: totalInKWMByUnit, value: neighborsTotalReadingInKWm),
+              label: previousReadingInKWm,
+              value: lastReadingValueInKWm,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            RowLabelValue(
+              label: totalInKWMByUnit,
+              value: neighborsTotalReadingValueInKWm,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
             RowLabelValue(label: valuePerKWh, value: kWhValue),
             SizedBox(
               width: double.maxFinite,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pocket_note/core/navigation/app_router.dart';
 import 'package:pocket_note/ui/screens/resources/strings.dart';
 import 'package:pocket_note/ui/widgets/custom_scaffold.dart';
+import 'package:pocket_note/ui/widgets/secondary_button.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -21,18 +22,12 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            OutlinedButton(
+            SecondaryButton(
               onPressed: () => {router.navigate(const PowerBillRoute())},
-              child: const Text(powerBill),
+              title: powerBill,
             ),
-            const OutlinedButton(
-              onPressed: null,
-              child: Text(monthlyBills),
-            ),
-            const OutlinedButton(
-              onPressed: null,
-              child: Text(toDoList),
-            )
+            SecondaryButton(onPressed: null, title: monthlyBills),
+            SecondaryButton(onPressed: null, title: toDoList)
           ],
         ),
       ),

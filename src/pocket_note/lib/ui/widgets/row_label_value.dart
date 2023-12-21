@@ -12,14 +12,14 @@ class RowLabelValue extends StatelessWidget {
       children: [
         Text(
           label,
-          style: Theme.of(context).textTheme.bodySmall,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         const SizedBox(
           width: 14,
         ),
         Text(
           value,
-          style: Theme.of(context).textTheme.bodySmall  ,
+          style: Theme.of(context).textTheme.bodySmall,
         )
       ],
     );

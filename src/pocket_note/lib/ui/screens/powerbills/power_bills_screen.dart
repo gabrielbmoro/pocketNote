@@ -32,13 +32,8 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
     return CustomScaffold(
       backEvent: () => router.pop(),
       appBarTitle: "Contas de Luz",
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-        ),
-        child: Observer(
-          builder: (_) => _body(_store.uiState.powerBills),
-        ),
+      body: Observer(
+        builder: (_) => _body(_store.uiState.powerBills),
       ),
       onFloatingActionButtonEvent: (() => _goToAddPowerBillScreen(context)),
     );
@@ -59,11 +54,11 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
   Widget _buildItem(TotalPowerBill totalPowerBill) {
     return PowerBillCard(
       month: totalPowerBill.powerBill.date,
-      currentReadingInKWm:
+      currentReadingValueInKWm:
           totalPowerBill.powerBill.currentReadingInKWm.toStringAsFixed(2),
-      lastReadingInKWm:
+      lastReadingValueInKWm:
           totalPowerBill.powerBill.lastReadingInKWm.toStringAsFixed(2),
-      neighborsTotalReadingInKWm: totalPowerBill
+      neighborsTotalReadingValueInKWm: totalPowerBill
           .powerBill.neighborsTotalReadingInKWm
           .toStringAsFixed(2),
       kWhValue: totalPowerBill.kWhValue.toStringAsFixed(2),
