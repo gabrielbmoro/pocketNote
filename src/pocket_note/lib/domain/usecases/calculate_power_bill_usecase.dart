@@ -11,18 +11,19 @@ mixin CalculatePowerBillUseCase {
 class CalculatePowerBillUseCaseImpl implements CalculatePowerBillUseCase {
   @override
   TotalPowerBill invoke(PowerBill powerBill) {
-    double monthReading =
+    double monthReadingInKWm =
         powerBill.currentReadingInKWm - powerBill.lastReadingInKWm;
 
     double valueOfOneKWm =
         powerBill.neighborsTotalReadingInKWm / powerBill.neighborsTotalValue;
 
-    double totalValue = monthReading * valueOfOneKWm;
+    double totalValue = monthReadingInKWm * valueOfOneKWm;
 
     return TotalPowerBill(
       powerBill: powerBill,
       kWhValue: valueOfOneKWm,
       finalValue: totalValue,
+      monthReadingInKWm: monthReadingInKWm,
     );
   }
 }

@@ -63,6 +63,7 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
           .toStringAsFixed(2),
       kWhValue: totalPowerBill.kWhValue.toStringAsFixed(2),
       finalValue: totalPowerBill.finalValue.toStringAsFixed(2),
+      onShareClickEvent: ()=> {_store.onShareClickEvent(totalPowerBill)},
     );
   }
 

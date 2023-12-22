@@ -10,15 +10,18 @@ class PowerBillCard extends StatelessWidget {
   String kWhValue;
   String finalValue;
   String month;
+  VoidCallback? onShareClickEvent;
 
-  PowerBillCard(
-      {super.key,
-      required this.currentReadingValueInKWm,
-      required this.lastReadingValueInKWm,
-      required this.neighborsTotalReadingValueInKWm,
-      required this.kWhValue,
-      required this.finalValue,
-      required this.month});
+  PowerBillCard({
+    super.key,
+    required this.currentReadingValueInKWm,
+    required this.lastReadingValueInKWm,
+    required this.neighborsTotalReadingValueInKWm,
+    required this.kWhValue,
+    required this.finalValue,
+    required this.month,
+    required this.onShareClickEvent,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +79,7 @@ class PowerBillCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 IconButton(
-                  onPressed: () => {},
+                  onPressed: onShareClickEvent,
                   icon: const Icon(Icons.share),
                   alignment: Alignment.topRight,
                 ),
