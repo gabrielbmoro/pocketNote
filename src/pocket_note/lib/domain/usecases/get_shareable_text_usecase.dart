@@ -25,12 +25,8 @@ class GetShareableTextUseCaseImpl implements GetShareableTextUseCase {
     String neighborsTotalValue =
         powerBill.neighborsTotalValue.toStringAsFixed(2);
 
-    String shareableText =
-        "$currentReadingInKWm(leitura atual) - $lastReadingInKWm(leitura passada) = $monthReadingInKWm (consumo do mês)\n\n";
-    shareableText +=
-        "$neighborsTotalReadingInKWm (total consumido da UC) / R\$$neighborsTotalValue = $pricePerKWm (preço do kW)\n\n";
-    shareableText +=
-        "Valor da nossa conta: $monthReadingInKWm * $pricePerKWm = $finalValue";
-    return shareableText;
+    return "${currentReadingInKWm}kW(leitura atual) - ${lastReadingInKWm}kW(leitura passada) = ${monthReadingInKWm}kW (consumo do mês)\n\n"
+        "${neighborsTotalReadingInKWm}kW(total consumido da UC) / R\$${neighborsTotalValue} (total da conta da UC) = R\$$pricePerKWm (preço do kW)\n\n"
+        "Valor da nossa conta: ${monthReadingInKWm}kW * R\$$pricePerKWm = R\$$finalValue";
   }
 }
