@@ -47,11 +47,11 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
     } else {
       return ListView.builder(
           itemCount: powerBills.length,
-          itemBuilder: (context, index) => _buildItem(powerBills[index]));
+          itemBuilder: (context, index) => _buildItem(powerBills[index], index == powerBills.length - 1));
     }
   }
 
-  Widget _buildItem(TotalPowerBill totalPowerBill) {
+  Widget _buildItem(TotalPowerBill totalPowerBill, bool isLatest) {
     return PowerBillCard(
       month: totalPowerBill.powerBill.date,
       currentReadingValueInKWm:
@@ -64,6 +64,7 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
       kWhValue: totalPowerBill.kWhValue.toStringAsFixed(2),
       finalValue: totalPowerBill.finalValue.toStringAsFixed(2),
       onShareClickEvent: ()=> {_store.onShareClickEvent(totalPowerBill)},
+      extraBottomSpace: isLatest
     );
   }
 
