@@ -24,4 +24,5 @@ jobs:
       - uses: subosito/flutter-action@v2
 
       - name: Install dependencies
-        run: cd src/pocket_note && flutter pub get
+        run: flutter --version
+        #run: cd src/pocket_note && flutter pub get
