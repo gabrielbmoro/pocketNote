@@ -27,5 +27,8 @@ jobs:
           channel: 'stable'
       - run: flutter --version
 
-      # name: Install dependencies
-        #run: cd src/pocket_note && flutter pub get
+      - name: Install dependencies
+        run: cd src/pocket_note && flutter pub get
+
+      - name: Unit tests
+        run: cd src/pocket_note && flutter test
