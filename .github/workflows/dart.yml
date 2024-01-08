@@ -23,15 +23,9 @@ jobs:
     - uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.16.5'
-        
-    - working-directory: ./src/pocket_note
-    - run: flutter pub get
+      
+    - run: cd src/pocket_note && flutter pub get
+    - run: cd src/pocket_note && flutter test
+    - run: cd src/pocket_note && flutter build apk
 
-    - working-directory: ./src/pocket_note
-    - run: flutter test
-
-    - working-directory: ./src/pocket_note
-    - run: flutter build apk
-
-    - working-directory: ./src/pocket_note
-    - run: flutter build appbundle
+    - run: cd src/pocket_note && flutter build appbundle
