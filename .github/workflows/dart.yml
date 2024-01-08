@@ -27,5 +27,8 @@ jobs:
           channel: 'stable'
       - run: flutter --version
 
+      - name: Flutter create
+        run: cd src/pocket_note && flutter create .
+        
       - name: Unit tests
         run: cd src/pocket_note && flutter test
