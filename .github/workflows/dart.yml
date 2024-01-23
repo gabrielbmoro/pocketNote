@@ -24,7 +24,6 @@ jobs:
       with:
         flutter-version: '3.16.5'
     - run: cd src/pocket_note && flutter --disable-analytics  
-    - run: cd src/pocket_note && flutter pub get
     - run: cd src/pocket_note && flutter test
     - run: cd src/pocket_note && flutter build apk
 
