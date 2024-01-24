@@ -25,6 +25,7 @@ jobs:
         flutter-version: '3.16.5'
     - run: cd src/pocket_note && flutter --disable-analytics  
     - run: cd src/pocket_note && flutter test
+    - run: cd src/pocket_note && dart run build_runner build --delete-conflicting-outputs 
     - run: cd src/pocket_note && flutter build apk
 
     - run: cd src/pocket_note && flutter build appbundle
