@@ -15,7 +15,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      working-directory: ./src/pocket_note
+      working-directory: src/pocket_note
 
       
     steps:
