@@ -1,13 +1,7 @@
 class AddPowerBillUIState {
-  ResultType? resultType;
+  bool isLoading;
 
   AddPowerBillUIState({
-    required this.resultType,
+    required this.isLoading,
   });
-}
-
-enum ResultType {
-  success,
-  error,
-  loading;
 }
