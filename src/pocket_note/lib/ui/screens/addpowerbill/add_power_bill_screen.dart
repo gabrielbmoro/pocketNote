@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:pocket_note/core/di/injection.dart';
 import 'package:pocket_note/ui/screens/addpowerbill/store/add_power_bill_store.dart';
 import 'package:pocket_note/ui/widgets/custom_scaffold.dart';
-import 'package:pocket_note/ui/widgets/month_selector.dart';
-import 'package:pocket_note/ui/widgets/number_text_input_field.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import '../../widgets/add_power_bill_form.dart';
+import '../../widgets/loader.dart';
 import '../resources/strings.dart';
 
 @RoutePage()
@@ -40,91 +40,17 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
       body: Observer(
         builder: (_) => Stack(
           children: [
-            _loader(),
-            _form(),
+            Loader(isLoading: _store.uiState.isLoading),
+            AddPowerBillForm(
+              initialMonthName: _store.monthName,
+              onCurrentReadingChanged: _store.setCurrentReading,
+              onLastReadingChanged: _store.setLastReading,
+              onMonthSelected: _store.setMonth,
+              onNeighborsTotalReadingChanged: _store.setNeighborsTotalReading,
+              onNeighborsTotalValueChanged: _store.setNeighborsTotalValue,
+            ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _loader() {
-    if (_store.uiState.isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    } else {
-      return const SizedBox.shrink();
-    }
-  }
-
-  Widget _form() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                date,
-                style: Theme.of(context).textTheme.labelLarge,
-              ),
-              const SizedBox(width: 12),
-              MonthSelector(
-                initialMonthSelected: _store.monthName,
-                months: months,
-                onSelected: _store.setMonth,
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          Text(
-            house,
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          NumberTextInputField(
-            labelText: currentReadingInKWm,
-            onChanged: _store.setCurrentReading,
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          NumberTextInputField(
-            labelText: previousReadingInKWm,
-            onChanged: _store.setLastReading,
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          const Divider(),
-          const SizedBox(
-            height: 12,
-          ),
-          Text(
-            neighborhood,
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          NumberTextInputField(
-            labelText: totalConsumptionInKWm,
-            onChanged: _store.setNeighborsTotalReading,
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          NumberTextInputField(
-            labelText: totalCurrencyValue,
-            onChanged: _store.setNeighborsTotalValue,
-          ),
-        ],
       ),
     );
   }
@@ -135,7 +61,6 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
     if (result) {
       snackBar = const SnackBar(
         content: Text(addPowerBillSuccessfulMessage),
-        behavior: SnackBarBehavior.floating,
       );
     } else {
       if (onRetry == null) {
