@@ -32,3 +32,8 @@ final List<String> months = [
   "Novembro",
   "Dezembro"
 ];
+const String addPowerBillSuccessfulMessage = "Conta de luz salva com sucesso!";
+const String addPowerBillErrorMessageWithRetry = "Ocorreu um erro. Repita a operação!";
+const String addPowerBillErrorMessage = "Ocorreu um erro. Tente mais tarde!";
+const String retry = "Repetir";
+const String house = "Casa";

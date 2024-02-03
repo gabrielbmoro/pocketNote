@@ -65,16 +65,15 @@ abstract class AddPowerBillBase with Store {
       neighborsTotalValue: neighborsTotalValue,
       neighborsTotalReadingInKWm: neighborsTotalReadingInKWm,
     );
-    uiState = AddPowerBillUIState(
-      isLoading: true
-    );
+    uiState = AddPowerBillUIState(isLoading: true);
 
     try {
-      return await savePowerBillUseCase.invoke(powerBill);
-    } catch(error) {
-      return false;
-    } finally {
+      bool result = await savePowerBillUseCase.invoke(powerBill);
       uiState = AddPowerBillUIState(isLoading: false);
+      return result;
+    } catch (error) {
+      uiState = AddPowerBillUIState(isLoading: false);
+      return false;
     }
   }
 }
