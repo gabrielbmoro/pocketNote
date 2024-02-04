@@ -67,13 +67,15 @@ abstract class AddPowerBillBase with Store {
     );
     uiState = AddPowerBillUIState(isLoading: true);
 
+    bool result = false;
     try {
-      bool result = await savePowerBillUseCase.invoke(powerBill);
-      uiState = AddPowerBillUIState(isLoading: false);
-      return result;
+      result = await savePowerBillUseCase.invoke(powerBill);
     } catch (error) {
+      result = false;
+    } finally {
       uiState = AddPowerBillUIState(isLoading: false);
-      return false;
     }
+
+    return result;
   }
 }
