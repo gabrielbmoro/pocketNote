@@ -19,6 +19,8 @@ class AddPowerBillScreen extends StatefulWidget {
 class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
   late AddPowerBillStore _store;
 
+  bool _shouldUpdatePreviousScreen = false;
+
   @override
   void initState() {
     _store = getIt();
@@ -30,7 +32,7 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
     StackRouter router = AutoRouter.of(context);
     return CustomScaffold(
       appBarTitle: addPowerBill,
-      backEvent: () => router.pop(),
+      backEvent: () => router.pop(_shouldUpdatePreviousScreen),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _addPowerBillEvent(context);
@@ -62,6 +64,7 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
       snackBar = const SnackBar(
         content: Text(addPowerBillSuccessfulMessage),
       );
+      _shouldUpdatePreviousScreen = true;
     } else {
       if (onRetry == null) {
         snackBar = const SnackBar(
