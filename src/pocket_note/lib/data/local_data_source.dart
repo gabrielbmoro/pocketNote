@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
 import 'package:pocket_note/domain/models/power_bill.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 @singleton
 class LocalDataSource {
@@ -19,6 +21,10 @@ class LocalDataSource {
   late Database _database;
 
   Future<void> init() async {
+    if (kIsWeb) {
+      databaseFactory = databaseFactoryFfiWeb;
+    }
+
     // Open the database and store the reference.
     _database = await openDatabase(
       // Set the path to the database. Note: Using the `join` function from the
