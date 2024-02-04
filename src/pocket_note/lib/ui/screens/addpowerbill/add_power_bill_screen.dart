@@ -34,9 +34,7 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
       appBarTitle: addPowerBill,
       backEvent: () => router.pop(_shouldUpdatePreviousScreen),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _addPowerBillEvent(context);
-        },
+        onPressed: _save,
         child: const Icon(Icons.save),
       ),
       body: Observer(
@@ -57,38 +55,30 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
     );
   }
 
-  Future<SnackBar> _save(VoidCallback? onRetry) async {
-    bool result = await _store.save();
-    SnackBar snackBar;
+  _save() {
+    _store.save().then(
+          (value) => _processAddPowerBillResult(value),
+        );
+  }
+
+  _processAddPowerBillResult(bool result) {
     if (result) {
-      snackBar = const SnackBar(
+      _shouldUpdatePreviousScreen = true;
+    }
+
+    SnackBar snackBar = _buildSnackBar(result);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  SnackBar _buildSnackBar(bool success) {
+    if (success) {
+      return const SnackBar(
         content: Text(addPowerBillSuccessfulMessage),
       );
-      _shouldUpdatePreviousScreen = true;
     } else {
-      if (onRetry == null) {
-        snackBar = const SnackBar(
-          content: Text(addPowerBillErrorMessage),
-        );
-      } else {
-        snackBar = SnackBar(
-          content: const Text(addPowerBillErrorMessageWithRetry),
-          action: SnackBarAction(label: retry, onPressed: onRetry),
-        );
-      }
+      return const SnackBar(
+        content: Text(addPowerBillErrorMessage),
+      );
     }
-    return snackBar;
-  }
-
-  _addPowerBillEvent(BuildContext context) {
-    _save(() => _onRetry()).then(
-      (snackBar) => ScaffoldMessenger.of(context).showSnackBar(snackBar),
-    );
-  }
-
-  _onRetry() async {
-    _save(null).then(
-      (snackBar) => ScaffoldMessenger.of(context).showSnackBar(snackBar),
-    );
   }
 }
