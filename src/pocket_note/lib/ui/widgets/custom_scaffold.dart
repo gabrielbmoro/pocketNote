@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 class CustomScaffold extends StatelessWidget {
   final String appBarTitle;
   final Widget body;
-  final VoidCallback? onFloatingActionButtonEvent;
   final VoidCallback? backEvent;
+  final FloatingActionButton? floatingActionButton;
 
   const CustomScaffold(
       {super.key,
       required this.appBarTitle,
       required this.body,
-      this.onFloatingActionButtonEvent,
-      this.backEvent});
+      this.backEvent,
+      this.floatingActionButton});
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +30,7 @@ class CustomScaffold extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
         child: body,
       ),
-      floatingActionButton: floatingActionButton(),
+      floatingActionButton: floatingActionButton,
     );
-  }
-
-  Widget? floatingActionButton() {
-    if (onFloatingActionButtonEvent != null) {
-      return FloatingActionButton(
-        onPressed: onFloatingActionButtonEvent,
-        child: const Icon(Icons.add),
-      );
-    } else {
-      return null;
-    }
   }
 }

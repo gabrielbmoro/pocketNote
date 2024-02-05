@@ -35,7 +35,12 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
       body: Observer(
         builder: (_) => _body(_store.uiState.powerBills),
       ),
-      onFloatingActionButtonEvent: (() => _goToAddPowerBillScreen(context)),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _goToAddPowerBillScreen(context);
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 
@@ -47,25 +52,25 @@ class _PowerBillsScreenState extends State<PowerBillScreen> {
     } else {
       return ListView.builder(
           itemCount: powerBills.length,
-          itemBuilder: (context, index) => _buildItem(powerBills[index], index == powerBills.length - 1));
+          itemBuilder: (context, index) =>
+              _buildItem(powerBills[index], index == powerBills.length - 1));
     }
   }
 
   Widget _buildItem(TotalPowerBill totalPowerBill, bool isLatest) {
     return PowerBillCard(
-      month: totalPowerBill.powerBill.date,
-      currentReadingValueInKWm:
-          totalPowerBill.powerBill.currentReadingInKWm.toStringAsFixed(2),
-      lastReadingValueInKWm:
-          totalPowerBill.powerBill.lastReadingInKWm.toStringAsFixed(2),
-      neighborsTotalReadingValueInKWm: totalPowerBill
-          .powerBill.neighborsTotalReadingInKWm
-          .toStringAsFixed(2),
-      kWhValue: totalPowerBill.kWhValue.toStringAsFixed(2),
-      finalValue: totalPowerBill.finalValue.toStringAsFixed(2),
-      onShareClickEvent: ()=> {_store.onShareClickEvent(totalPowerBill)},
-      extraBottomSpace: isLatest
-    );
+        month: totalPowerBill.powerBill.date,
+        currentReadingValueInKWm:
+            totalPowerBill.powerBill.currentReadingInKWm.toStringAsFixed(2),
+        lastReadingValueInKWm:
+            totalPowerBill.powerBill.lastReadingInKWm.toStringAsFixed(2),
+        neighborsTotalReadingValueInKWm: totalPowerBill
+            .powerBill.neighborsTotalReadingInKWm
+            .toStringAsFixed(2),
+        kWhValue: totalPowerBill.kWhValue.toStringAsFixed(2),
+        finalValue: totalPowerBill.finalValue.toStringAsFixed(2),
+        onShareClickEvent: () => {_store.onShareClickEvent(totalPowerBill)},
+        extraBottomSpace: isLatest);
   }
 
   _goToAddPowerBillScreen(BuildContext context) async {

@@ -20,7 +20,7 @@ abstract class AddPowerBillBase with Store {
 
   @observable
   AddPowerBillUIState uiState = AddPowerBillUIState(
-    resultType: null,
+    isLoading: false,
   );
 
   final SavePowerBillUseCase savePowerBillUseCase;
@@ -50,7 +50,7 @@ abstract class AddPowerBillBase with Store {
   }
 
   @action
-  void save() {
+  Future<bool> save() async {
     final date = monthName ?? "";
     final lastReadingInKWm = _lastReading!.parseToDouble() ?? 0.0;
     final currentReadingInKWm = _currentReading!.parseToDouble() ?? 0.0;
@@ -65,28 +65,17 @@ abstract class AddPowerBillBase with Store {
       neighborsTotalValue: neighborsTotalValue,
       neighborsTotalReadingInKWm: neighborsTotalReadingInKWm,
     );
-    uiState = AddPowerBillUIState(
-      resultType: ResultType.loading,
-    );
-    savePowerBillUseCase
-        .invoke(powerBill)
-        .then((value) => _onSaveSuccess(value))
-        .catchError((stackTrace) => _onError);
-  }
+    uiState = AddPowerBillUIState(isLoading: true);
 
-  _onSaveSuccess(bool value) {
-    if (value) {
-      uiState = AddPowerBillUIState(
-        resultType: ResultType.success,
-      );
-    } else {
-      _onError();
+    bool result = false;
+    try {
+      result = await savePowerBillUseCase.invoke(powerBill);
+    } catch (error) {
+      result = false;
+    } finally {
+      uiState = AddPowerBillUIState(isLoading: false);
     }
-  }
 
-  _onError() {
-    uiState = AddPowerBillUIState(
-      resultType: ResultType.error,
-    );
+    return result;
   }
 }
