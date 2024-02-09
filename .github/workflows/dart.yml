@@ -34,8 +34,8 @@ jobs:
     - run: dart run build_runner build --delete-conflicting-outputs
       working-directory: src/pocket_note
     
-    - run: flutter build apk
+    - run: flutter build apk --no-tree-shake-icons
       working-directory: src/pocket_note
     
-    - run: flutter build appbundle
+    - run: flutter build appbundle --no-tree-shake-icons
       working-directory: src/pocket_note
