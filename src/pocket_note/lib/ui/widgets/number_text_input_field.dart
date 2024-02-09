@@ -18,7 +18,7 @@ class NumberTextInputField extends StatelessWidget {
           onChanged(text);
         }
       },
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9.]"))],
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
         labelText: labelText,
