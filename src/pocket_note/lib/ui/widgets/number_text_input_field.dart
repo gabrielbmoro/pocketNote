@@ -13,12 +13,11 @@ class NumberTextInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: TextInputType.number,
-      onChanged: (text) {
-        if (text.parseToDouble() != null) {
-          onChanged(text);
-        }
-      },
+      onChanged: onChanged,
       inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9.]"))],
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) =>
+          value?.parseToDouble() == null ? "Invalid field" : null,
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
         labelText: labelText,

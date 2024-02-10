@@ -21,6 +21,8 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
 
   bool _shouldUpdatePreviousScreen = false;
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     _store = getIt();
@@ -41,13 +43,16 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
         builder: (_) => Stack(
           children: [
             Loader(isLoading: _store.uiState.isLoading),
-            AddPowerBillForm(
-              initialMonthName: _store.monthName,
-              onCurrentReadingChanged: _store.setCurrentReading,
-              onLastReadingChanged: _store.setLastReading,
-              onMonthSelected: _store.setMonth,
-              onNeighborsTotalReadingChanged: _store.setNeighborsTotalReading,
-              onNeighborsTotalValueChanged: _store.setNeighborsTotalValue,
+            Form(
+              key: _formKey,
+              child: AddPowerBillForm(
+                initialMonthName: _store.monthName,
+                onCurrentReadingChanged: _store.setCurrentReading,
+                onLastReadingChanged: _store.setLastReading,
+                onMonthSelected: _store.setMonth,
+                onNeighborsTotalReadingChanged: _store.setNeighborsTotalReading,
+                onNeighborsTotalValueChanged: _store.setNeighborsTotalValue,
+              ),
             ),
           ],
         ),
@@ -56,9 +61,13 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
   }
 
   _save() {
-    _store.save().then(
-          (value) => _processAddPowerBillResult(value),
-        );
+    if (_formKey.currentState?.validate() == true) {
+      _store.save().then(
+            (value) => _processAddPowerBillResult(value),
+          );
+    } else {
+      _showFeedback(false);
+    }
   }
 
   _processAddPowerBillResult(bool result) {
@@ -66,19 +75,20 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
       _shouldUpdatePreviousScreen = true;
     }
 
-    SnackBar snackBar = _buildSnackBar(result);
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    _showFeedback(result);
   }
 
-  SnackBar _buildSnackBar(bool success) {
+  _showFeedback(bool success) {
+    SnackBar snackBar;
     if (success) {
-      return const SnackBar(
+      snackBar = const SnackBar(
         content: Text(addPowerBillSuccessfulMessage),
       );
     } else {
-      return const SnackBar(
+      snackBar = const SnackBar(
         content: Text(addPowerBillErrorMessage),
       );
     }
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
