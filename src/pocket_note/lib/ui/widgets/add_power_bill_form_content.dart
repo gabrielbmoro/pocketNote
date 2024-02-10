@@ -4,7 +4,7 @@ import '../screens/resources/strings.dart';
 import 'month_selector.dart';
 import 'number_text_input_field.dart';
 
-class AddPowerBillForm extends StatelessWidget {
+class AddPowerBillFormContent extends StatelessWidget {
   final ValueChanged<String?>? onMonthSelected;
   final Function(String?) onCurrentReadingChanged;
   final Function(String?) onLastReadingChanged;
@@ -12,7 +12,7 @@ class AddPowerBillForm extends StatelessWidget {
   final Function(String?) onNeighborsTotalValueChanged;
   final String? initialMonthName;
 
-  const AddPowerBillForm({
+  const AddPowerBillFormContent({
     super.key,
     required this.onMonthSelected,
     required this.onCurrentReadingChanged,

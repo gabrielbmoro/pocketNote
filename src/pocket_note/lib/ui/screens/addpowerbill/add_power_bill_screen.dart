@@ -4,7 +4,7 @@ import 'package:pocket_note/core/di/injection.dart';
 import 'package:pocket_note/ui/screens/addpowerbill/store/add_power_bill_store.dart';
 import 'package:pocket_note/ui/widgets/custom_scaffold.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import '../../widgets/add_power_bill_form.dart';
+import '../../widgets/add_power_bill_form_content.dart';
 import '../../widgets/loader.dart';
 import '../resources/strings.dart';
 
@@ -45,7 +45,7 @@ class _AddPowerBillScreenState extends State<AddPowerBillScreen> {
             Loader(isLoading: _store.uiState.isLoading),
             Form(
               key: _formKey,
-              child: AddPowerBillForm(
+              child: AddPowerBillFormContent(
                 initialMonthName: _store.monthName,
                 onCurrentReadingChanged: _store.setCurrentReading,
                 onLastReadingChanged: _store.setLastReading,
