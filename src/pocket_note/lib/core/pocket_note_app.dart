@@ -14,7 +14,7 @@ class PocketNoteApp extends StatelessWidget {
     return MaterialApp.router(
       title: appName,
       theme: ThemeData(
-        colorSchemeSeed: Colors.deepPurple,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple),
         useMaterial3: true,
         brightness: Brightness.light,
         typography: Typography(),
