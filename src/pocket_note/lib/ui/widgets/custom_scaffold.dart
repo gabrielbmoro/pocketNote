@@ -5,13 +5,16 @@ class CustomScaffold extends StatelessWidget {
   final Widget body;
   final VoidCallback? backEvent;
   final FloatingActionButton? floatingActionButton;
+  final EdgeInsets edgeInsets;
 
-  const CustomScaffold(
-      {super.key,
-      required this.appBarTitle,
-      required this.body,
-      this.backEvent,
-      this.floatingActionButton});
+  const CustomScaffold({
+    super.key,
+    required this.appBarTitle,
+    required this.body,
+    this.backEvent,
+    this.floatingActionButton,
+    this.edgeInsets = const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class CustomScaffold extends StatelessWidget {
         title: Text(appBarTitle),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+        padding: edgeInsets,
         child: body,
       ),
       floatingActionButton: floatingActionButton,
