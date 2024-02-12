@@ -14,7 +14,6 @@ class HomeScreen extends StatelessWidget {
     StackRouter router = AutoRouter.of(context);
     return CustomScaffold(
       appBarTitle: appName,
-      backEvent: () => router.pop(),
       body: SizedBox(
         width: double.maxFinite,
         height: double.maxFinite,
