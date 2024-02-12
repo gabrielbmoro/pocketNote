@@ -1,3 +1,4 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_note/ui/screens/resources/strings.dart';
 
@@ -11,16 +12,30 @@ class PocketNoteApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    return DynamicColorBuilder(
+        builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+      return _buildDynamicColorWidget(lightDynamic, darkDynamic);
+    });
+  }
+
+  Widget _buildDynamicColorWidget(
+      ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+    ColorScheme defaultColorScheme =
+        ColorScheme.fromSeed(seedColor: Colors.deepPurple);
+
+    ColorScheme lightColors = lightDynamic ?? defaultColorScheme;
+    ColorScheme darkColors = darkDynamic ?? defaultColorScheme;
+
     return MaterialApp.router(
       title: appName,
       theme: ThemeData(
-        colorSchemeSeed: Colors.deepPurple,
+        colorScheme: lightColors,
         useMaterial3: true,
         brightness: Brightness.light,
         typography: Typography(),
       ),
       darkTheme: ThemeData(
-        colorSchemeSeed: Colors.deepPurple,
+        colorScheme: darkColors,
         useMaterial3: true,
         brightness: Brightness.dark,
         typography: Typography(),
