@@ -19,12 +19,21 @@ class PocketNoteApp extends StatelessWidget {
   }
 
   Widget _buildDynamicColorWidget(
-      ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-    ColorScheme defaultColorScheme =
-        ColorScheme.fromSeed(seedColor: Colors.deepPurple);
+    ColorScheme? lightDynamic,
+    ColorScheme? darkDynamic,
+  ) {
+    ColorScheme lightColors = lightDynamic ??
+        ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          brightness: Brightness.light,
+        );
 
-    ColorScheme lightColors = lightDynamic ?? defaultColorScheme;
-    ColorScheme darkColors = darkDynamic ?? defaultColorScheme;
+    ColorScheme darkColors = darkDynamic ??
+        ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          brightness: Brightness.dark,
+        );
+    ;
 
     return MaterialApp.router(
       title: appName,
