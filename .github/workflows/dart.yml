@@ -36,6 +36,3 @@ jobs:
     
     - run: flutter build apk --no-tree-shake-icons
       working-directory: src/pocket_note
-    
-    - run: flutter build appbundle --no-tree-shake-icons
-      working-directory: src/pocket_note
