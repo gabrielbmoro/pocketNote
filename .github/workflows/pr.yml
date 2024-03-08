@@ -34,7 +34,7 @@ jobs:
       working-directory: src/pocket_note
 
     - name: Build
-      run: flutter build apk --no-tree-shake-icons
+      run: flutter build apk
       working-directory: src/pocket_note
 
     - name: Run unit tests
