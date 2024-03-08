@@ -5,7 +5,7 @@ import 'package:pocket_note/domain/models/power_bill.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
-@singleton
+@lazySingleton
 class LocalDataSource {
   static const databaseName = "pocket_note_database.db";
 
