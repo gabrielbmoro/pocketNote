@@ -1,6 +1,6 @@
 # Welcome! 👋
 
-Welcome to the pocket note project. This is a personal app I am using to help my self montly. It is a kind of a expenses app, but this app was made specially for me.
+Welcome to the pocket note project. This is a personal app I am using to help my self montly. It is a kind of a expenses app, but this app was made specially for me. 
 
 I live in a ranch with other families, we  split the value of our Power bills, sometimes this is hard to manage because we have some values to consider comparing the previous month. The idea of the app is to help specially in this scenario.
 
